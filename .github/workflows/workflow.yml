@@ -2,7 +2,7 @@ name: My Practice Workflow
 
 on:
   schedule:
-    -cron: '0 3 * * SUN'
+    - cron: '0 3 * * SUN'
 
   workflow_dispatch:
     inputs:
