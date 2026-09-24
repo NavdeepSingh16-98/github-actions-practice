@@ -1,0 +1,33 @@
+name: My Practice Workflow
+
+on:
+  schedule:
+    -cron: '0 3 * * SUN'
+
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Test scenario tags'
+
+  push:
+    branches:
+      - main
+
+jobs:
+  run-tasks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Display Manual Inputs
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          echo "Selected Log Level: ${{github.event.inputs.logLevel }}"
+          echo "Test Tags: ${{github.events.inputs.tags }}"
+
+      - name: Default Task
+        run: echo "The Github Actions workflow ran successfully!"
